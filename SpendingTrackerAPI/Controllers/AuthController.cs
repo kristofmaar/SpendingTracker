@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -33,7 +33,7 @@ namespace SpendingTrackerAPI.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 Name = model.Name,
-                Currency = model.Currency,
+                Currency = (Currency)Enum.Parse(typeof(Currency), model.Currency),
                 Categories = new List<Category>() { new Category { Name = "Food", Description = "Delicious food" }, new Category { Name = "Groceries" } },
                 SecurityStamp = Guid.NewGuid().ToString()
             };

@@ -16,8 +16,6 @@ namespace SpendingTrackerAPI.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-
             builder.Entity<User>()
                 .Property(c => c.Currency)
                 .HasConversion<string>();
@@ -26,10 +24,12 @@ namespace SpendingTrackerAPI.Data
                 .Property(c => c.Currency)
                 .HasConversion<string>();
 
-            builder.Entity<IdentityRole>().HasData(
-                new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
-                new { Id = "2", Name = "Customer", NormalizedName = "CUSTOMER" }
+            builder.Entity<Role>().HasData(
+                new { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" },
+                new { Id = Guid.NewGuid(), Name = "Customer", NormalizedName = "CUSTOMER" }
             );
+
+            base.OnModelCreating(builder);
         }
 
         public DbSet<Category> Categories { get; set; }

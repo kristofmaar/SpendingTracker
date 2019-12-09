@@ -16,7 +16,7 @@ namespace SpendingTrackerAPI.ViewModels
         public string Name { get; set; }
 
         [Required]
-        public Currency Currency { get; set; }
+        public string Currency { get; set; }
     }
 
 }

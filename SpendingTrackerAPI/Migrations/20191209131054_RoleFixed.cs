@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpendingTrackerAPI.Migrations
 {
-    public partial class FKFixed : Migration
+    public partial class RoleFixed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,20 +47,6 @@ namespace SpendingTrackerAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IdentityRole",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    NormalizedName = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityRole", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,14 +205,14 @@ namespace SpendingTrackerAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "IdentityRole",
+                table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", null, "Admin", "ADMIN" });
+                values: new object[] { new Guid("2709a59c-620d-4cf7-9c9e-f45106fb2941"), null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
-                table: "IdentityRole",
+                table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2", null, "Customer", "CUSTOMER" });
+                values: new object[] { new Guid("c04393ad-c3ec-4037-b723-39cb32740526"), null, "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -299,9 +285,6 @@ namespace SpendingTrackerAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "IdentityRole");
 
             migrationBuilder.DropTable(
                 name: "Spendings");
