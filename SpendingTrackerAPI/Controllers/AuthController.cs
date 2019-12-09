@@ -40,7 +40,7 @@ namespace SpendingTrackerAPI.Controllers
                 UserName = model.Email,
                 Name = model.Name,
                 Currency = (Currency)Enum.Parse(typeof(Currency), model.Currency),
-                Categories = new List<Category>() { new Category { Name = "Food", Description = "Delicious food" }, new Category { Name = "Groceries" } },
+                Categories = new List<Category>() { new Category { Name = "Food", Description = "Delicious food" }, new Category { Name = "Groceries" }, new Category { Name = "Entertainment" } },
                 SecurityStamp = Guid.NewGuid().ToString()
             };
             var result = await _userManager.CreateAsync(user, model.Password);
