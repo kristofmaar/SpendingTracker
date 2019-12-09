@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SpendingTrackerAPI.Models
+namespace SpendingTrackerAPI.Model
 {
     public class User : IdentityUser<Guid>
     {
@@ -17,13 +17,14 @@ namespace SpendingTrackerAPI.Models
         public string Name { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Balance { get; set; }
 
         [Required]
         public Currency Currency { get; set; }
 
-        ICollection<Category> Categories { get; set; }
+        public ICollection<Category> Categories { get; set; }
 
-        ICollection<Spending> Spendings { get; set; }
+        public ICollection<Spending> Spendings { get; set; }
     }
 }

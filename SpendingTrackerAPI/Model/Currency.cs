@@ -1,4 +1,4 @@
-﻿namespace SpendingTrackerAPI.Models
+﻿namespace SpendingTrackerAPI.Model
 {
     public enum Currency
     {

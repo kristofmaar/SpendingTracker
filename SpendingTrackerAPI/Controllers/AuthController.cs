@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SpendingTrackerAPI.Model;
 using SpendingTrackerAPI.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,10 +15,10 @@ namespace SpendingTrackerAPI.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthController(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -26,10 +28,13 @@ namespace SpendingTrackerAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = model.Email,
                 UserName = model.Email,
+                Name = model.Name,
+                Currency = model.Currency,
+                Categories = new List<Category>() { new Category { Name = "Food", Description = "Delicious food" }, new Category { Name = "Groceries" } },
                 SecurityStamp = Guid.NewGuid().ToString()
             };
             var result = await _userManager.CreateAsync(user, model.Password);

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SpendingTrackerAPI.Data;
+using SpendingTrackerAPI.Model;
 
 namespace SpendingTrackerAPI
 {
@@ -31,9 +32,9 @@ namespace SpendingTrackerAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer("Server=(localdb)mssqllocaldb;Database=SpendingTracker;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<SpendingTrackerDbContext>(option => option.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SpendingTracker;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(
+            services.AddIdentity<User, Role>(
                     option =>
                     {
                         option.Password.RequireDigit = false;
@@ -42,7 +43,7 @@ namespace SpendingTrackerAPI
                         option.Password.RequireUppercase = false;
                         option.Password.RequireLowercase = false;
                     }
-                ).AddEntityFrameworkStores<ApplicationDbContext>()
+                ).AddEntityFrameworkStores<SpendingTrackerDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(option => {

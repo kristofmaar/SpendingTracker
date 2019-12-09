@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SpendingTrackerAPI.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpendingTrackerAPI.ViewModels
 {
@@ -10,6 +11,12 @@ namespace SpendingTrackerAPI.ViewModels
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public Currency Currency { get; set; }
     }
 
 }
