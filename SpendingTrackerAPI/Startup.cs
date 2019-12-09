@@ -62,11 +62,20 @@ namespace SpendingTrackerAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SigningKey"]))
                 };
             });
-            
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("Cors", options => {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyMethod();
+                    options.AllowAnyHeader();
+                });
+            });
+
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -77,9 +86,8 @@ namespace SpendingTrackerAPI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            
             app.UseAuthentication();
+            app.UseCors("Cors");
             app.UseMvc();
         }
     }

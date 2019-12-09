@@ -1,3 +1,5 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace SpendingTrackerAPI.Controllers
 {
+    [ApiController]
+    [EnableCors("Cors")]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -26,6 +31,7 @@ namespace SpendingTrackerAPI.Controllers
 
         [Route("register")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
         {
             var user = new User
@@ -47,6 +53,7 @@ namespace SpendingTrackerAPI.Controllers
 
         [Route("login")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginViewModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
