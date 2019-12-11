@@ -39,7 +39,7 @@ namespace SpendingTrackerAPI.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 Name = model.Name,
-                Currency = (Currency)Enum.Parse(typeof(Currency), model.Currency),
+                Currency = (Currency)model.Currency,
                 Categories = new List<Category>() { new Category { Name = "Food", Description = "Delicious food" }, new Category { Name = "Groceries" }, new Category { Name = "Entertainment" } },
                 SecurityStamp = Guid.NewGuid().ToString()
             };
