@@ -1,0 +1,32 @@
+<div class="row justify-content-center align-items-center" style="height:80vh">
+  <div class="col-4">
+    <div class="card">
+      <h4 class="card-header">Registration</h4>
+      <div class="card-body">
+        <form name="login" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="this.email" placeholder="Email" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" [(ngModel)]="this.password" placeholder="Password" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password again" name="passwordagain">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="this.name" placeholder="Name" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+          <select [(ngModel)]="this.currency" class="form-control" [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="0" selected="selected" disabled>Please select your currency</option>
+            <option [ngValue]="0">HUF</option>
+            <option [ngValue]="1">USD</option>
+            <option [ngValue]="2">EUR</option>
+          </select>
+          </div>
+          <input class="btn btn-primary" (click)="register()" name="submit" type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

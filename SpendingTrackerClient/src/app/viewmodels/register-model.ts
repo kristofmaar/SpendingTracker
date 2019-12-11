@@ -3,4 +3,11 @@ export class RegisterModel {
   public password: string;
   public name: string;
   public currency: Currency;
+
+  constructor(email: string, password: string, name: string, currency: Currency) {
+    this.email = email;
+    this.password = password;
+    this.name = name;
+    this.currency = currency;
+  }
 }
