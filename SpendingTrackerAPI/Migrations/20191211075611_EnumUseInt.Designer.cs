@@ -10,8 +10,8 @@ using SpendingTrackerAPI.Data;
 namespace SpendingTrackerAPI.Migrations
 {
     [DbContext(typeof(SpendingTrackerDbContext))]
-    [Migration("20191209131054_RoleFixed")]
-    partial class RoleFixed
+    [Migration("20191211075611_EnumUseInt")]
+    partial class EnumUseInt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,13 +175,13 @@ namespace SpendingTrackerAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2709a59c-620d-4cf7-9c9e-f45106fb2941"),
+                            Id = new Guid("37087378-117d-4d41-a17d-7478234566c0"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("c04393ad-c3ec-4037-b723-39cb32740526"),
+                            Id = new Guid("fd1ef154-93ef-441c-8c06-99e1b1ae2361"),
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -199,9 +199,8 @@ namespace SpendingTrackerAPI.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -237,9 +236,8 @@ namespace SpendingTrackerAPI.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")

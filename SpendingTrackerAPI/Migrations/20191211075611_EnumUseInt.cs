@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpendingTrackerAPI.Migrations
 {
-    public partial class RoleFixed : Migration
+    public partial class EnumUseInt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace SpendingTrackerAPI.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(nullable: false)
+                    Currency = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,7 +181,7 @@ namespace SpendingTrackerAPI.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(nullable: false),
+                    Currency = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     CategoryId = table.Column<Guid>(nullable: false),
@@ -207,12 +207,12 @@ namespace SpendingTrackerAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("2709a59c-620d-4cf7-9c9e-f45106fb2941"), null, "Admin", "ADMIN" });
+                values: new object[] { new Guid("37087378-117d-4d41-a17d-7478234566c0"), null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("c04393ad-c3ec-4037-b723-39cb32740526"), null, "Customer", "CUSTOMER" });
+                values: new object[] { new Guid("fd1ef154-93ef-441c-8c06-99e1b1ae2361"), null, "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

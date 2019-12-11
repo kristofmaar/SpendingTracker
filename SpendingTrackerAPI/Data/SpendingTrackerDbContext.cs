@@ -18,11 +18,11 @@ namespace SpendingTrackerAPI.Data
         {
             builder.Entity<User>()
                 .Property(c => c.Currency)
-                .HasConversion<string>();
+                .HasConversion<int>();
 
             builder.Entity<Spending>()
                 .Property(c => c.Currency)
-                .HasConversion<string>();
+                .HasConversion<int>();
 
             builder.Entity<Role>().HasData(
                 new { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" },
