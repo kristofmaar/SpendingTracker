@@ -27,7 +27,7 @@ export class UserService {
 
   constructor(private router: Router, private http: HttpClient) {
     this.user = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-    this.loggedIn = !!this.user;
+    this.loggedIn = !!this.user.getValue();
     this._authNavStatusSource.next(this.loggedIn);
   }
 

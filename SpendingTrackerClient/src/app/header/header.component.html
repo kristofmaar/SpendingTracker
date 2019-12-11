@@ -1,13 +1,18 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color: darkseagreen;">
   <a class="navbar-brand" routerLink="/dashboard">Spending Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <div *ngIf="status" class="container-fluid">
+    <button type="button" class="btn btn-light">Balance: {{ userService.user.getValue().balance }} {{ currency[userService.user.getValue().currency] }}</button>
+  </div>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-
     <ul  class="navbar-nav mr-auto">
       <li *ngIf="status" class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li *ngIf="status" class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/categories">Categories</a>
       </li>
     </ul>
   </div>
@@ -16,10 +21,7 @@
     <ul class="navbar-nav ml-auto">
       <ul class="nav navbar-nav">
         <li *ngIf="status" class="nav-item">
-          <label class="navbar-text">Balance: {{ user.balance }} {{ currency[user.currency] }}</label>
-        </li>
-        <li *ngIf="status" class="nav-item" style="margin-left: 1vh">
-          <button type="button" class="btn btn-light" (click)="logout()">Logout</button>
+          <button type="button" class="btn btn-outline-light" (click)="logout()">Logout</button>
         </li>
         <li *ngIf="!status" class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/register">Sign Up</a>
