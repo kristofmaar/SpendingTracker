@@ -78,6 +78,7 @@ namespace SpendingTrackerAPI.Controllers
                 return Ok(
                   new
                   {
+                      Id = user.Id,
                       Name = user.Name,
                       Username = user.UserName,
                       Balance = user.Balance,

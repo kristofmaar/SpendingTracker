@@ -63,6 +63,8 @@ namespace SpendingTrackerAPI
                 };
             });
 
+            services.AddControllers().AddNewtonsoftJson();
+
             services.AddCors(c =>
             {
                 c.AddPolicy("Cors", options => {

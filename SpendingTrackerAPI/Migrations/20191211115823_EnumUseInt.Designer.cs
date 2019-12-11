@@ -10,7 +10,7 @@ using SpendingTrackerAPI.Data;
 namespace SpendingTrackerAPI.Migrations
 {
     [DbContext(typeof(SpendingTrackerDbContext))]
-    [Migration("20191211075611_EnumUseInt")]
+    [Migration("20191211115823_EnumUseInt")]
     partial class EnumUseInt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,13 +175,13 @@ namespace SpendingTrackerAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("37087378-117d-4d41-a17d-7478234566c0"),
+                            Id = new Guid("494c0d2c-fed8-4442-a358-e8b5dd2d4d95"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("fd1ef154-93ef-441c-8c06-99e1b1ae2361"),
+                            Id = new Guid("ca1423b2-4422-4722-8774-6032d21daeb5"),
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -212,8 +212,6 @@ namespace SpendingTrackerAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("UserId");
 
@@ -359,12 +357,6 @@ namespace SpendingTrackerAPI.Migrations
 
             modelBuilder.Entity("SpendingTrackerAPI.Model.Spending", b =>
                 {
-                    b.HasOne("SpendingTrackerAPI.Model.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SpendingTrackerAPI.Model.User", null)
                         .WithMany("Spendings")
                         .HasForeignKey("UserId")

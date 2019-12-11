@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ namespace SpendingTrackerAPI
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("Cors")]
     public class SpendingController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -34,15 +36,21 @@ namespace SpendingTrackerAPI
         }
 
         [HttpPost]
+        [Route("add")]
         public void Post([FromBody]Spending newSpending)
         {
             _context.Spendings.Add(newSpending);
+            User toUpdate = _context.Users.Where(x => x.Id == newSpending.UserId).FirstOrDefault();
+            toUpdate.Balance = toUpdate.Balance - newSpending.Amount;
+            _context.Users.Update(toUpdate);
+            _context.SaveChanges();
         }
 
         [HttpPost]
         public void Update([FromBody]Spending updatedSpending)
         {
             _context.Spendings.Update(updatedSpending);
+            _context.SaveChanges();
         }
     }
 }

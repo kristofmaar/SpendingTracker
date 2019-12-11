@@ -23,7 +23,7 @@ namespace SpendingTrackerAPI.Model
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public Category Category { get; set; }
+        public Guid CategoryId { get; set; }
 
         [Required]
         public Guid UserId { get; set; }

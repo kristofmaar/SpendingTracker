@@ -191,12 +191,6 @@ namespace SpendingTrackerAPI.Migrations
                 {
                     table.PrimaryKey("PK_Spendings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Spendings_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
                         name: "FK_Spendings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
@@ -207,12 +201,12 @@ namespace SpendingTrackerAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("37087378-117d-4d41-a17d-7478234566c0"), null, "Admin", "ADMIN" });
+                values: new object[] { new Guid("494c0d2c-fed8-4442-a358-e8b5dd2d4d95"), null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("fd1ef154-93ef-441c-8c06-99e1b1ae2361"), null, "Customer", "CUSTOMER" });
+                values: new object[] { new Guid("ca1423b2-4422-4722-8774-6032d21daeb5"), null, "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -259,11 +253,6 @@ namespace SpendingTrackerAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Spendings_CategoryId",
-                table: "Spendings",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Spendings_UserId",
                 table: "Spendings",
                 column: "UserId");
@@ -287,13 +276,13 @@ namespace SpendingTrackerAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "Spendings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
