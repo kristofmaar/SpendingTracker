@@ -9,7 +9,7 @@
         <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
       </li>
       <li *ngIf="status" class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/categories">Categories</a>
+        <a class="nav-link disabled" routerLinkActive="active" routerLink="/categories">Categories</a>
       </li>
     </ul>
   </div>
@@ -17,6 +17,9 @@
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
     <ul class="navbar-nav ml-auto">
       <ul class="nav navbar-nav">
+        <li *ngIf="status" class="nav-item">
+          <span class="navbar-text text-light" style="margin-right: 1vh;">Hello {{ userService.user.getValue().name}}!</span>
+        </li>
         <li *ngIf="status" class="nav-item">
           <button type="button" class="btn btn-outline-light" (click)="logout()">Logout</button>
         </li>

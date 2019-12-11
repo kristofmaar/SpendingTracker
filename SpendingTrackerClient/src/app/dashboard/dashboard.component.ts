@@ -8,6 +8,7 @@ import {Category} from '../viewmodels/category';
 import {UserService} from '../service/user.service';
 import {Currency} from '../viewmodels/currency';
 import {SpendingService} from '../service/spending.service';
+import {BalanceService} from '../service/balance.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,17 +26,18 @@ export class DashboardComponent {
   private categories: Array<Category>;
   private currency = Currency;
 
+  private balanceToAdd: string;
   private balance: number;
   private spendingToAdd = new Spending();
 
-  constructor(private router: Router, private http: HttpClient, private userService: UserService, private spendingService: SpendingService) {
+  constructor(private router: Router, private http: HttpClient, private userService: UserService, private spendingService: SpendingService, private balanceService: BalanceService) {
     this.refresh();
   }
 
   refresh() {
     this.spendings = new Array<Spending>();
     this.categories = new Array<Category>();
-    this.spendingService.getSpendings().subscribe(s => { this.spendings = s; });
+    this.spendingService.getSpendings().subscribe(s => { this.spendings = s.reverse(); });
     this.getCategories().subscribe(c => { this.categories = c; });
     this.getBalance().subscribe(b => { this.balance = b; });
   }
@@ -57,7 +59,15 @@ export class DashboardComponent {
   }
 
   getBalance(): Observable<number> {
-    return this.http.get<number>(this.baseUrl + 'balance/get/' + this.userService.user.getValue().id, this.httpOptions);
+    return this.balanceService.getBalance();
+  }
+
+  addBalance() {
+    this.balanceService.addBalance(this.balanceToAdd).subscribe(
+      ret => {
+        this.refresh();
+        this.balanceToAdd = '';
+      });
   }
 
   getCategoryNameById(id: string) {

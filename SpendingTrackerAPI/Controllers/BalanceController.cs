@@ -37,11 +37,11 @@ namespace SpendingTrackerAPI.Controllers
         }
 
         [HttpPost]
-        [Route("add/{guid}")]
-        public void Post(string guid, decimal spent)
+        [Route("{guid}")]
+        public void Post(string guid, [FromBody] string spent)
         {
             User toUpdate = _context.Users.Where(x => x.Id == new Guid(guid)).FirstOrDefault();
-            toUpdate.Balance = toUpdate.Balance + spent;
+            toUpdate.Balance = toUpdate.Balance + new Decimal(double.Parse(spent));
             _context.Users.Update(toUpdate);
             _context.SaveChanges();
         }
