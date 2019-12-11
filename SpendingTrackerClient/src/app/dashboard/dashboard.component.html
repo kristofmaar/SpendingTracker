@@ -45,14 +45,14 @@
       <h3 class="text-light" align="left">Spending details</h3>
     </div>
     <div class="card-body">
-      <div *ngFor="let item of this.spendings" class="card text-white border-danger mb-5" style="max-width: 25rem;">
+      <div *ngFor="let item of this.spendings" class="card text-white border-danger mb-5" style="max-width: 30rem;">
         <div class="card-header" align="left">
           <h6 class="d-inline-block card-title text-dark">{{ item.amount }} {{ currency[item.currency] }}</h6>
           <h6 class="d-inline-block card-subtitle float-right margin-top text-dark" style="margin-top:.2rem;">{{ getDate(item.dateCreated) }}</h6>
         </div>
         <div class="card-body" align="left">
           <h5 class="card-title text-dark">{{ getCategoryNameById(item.categoryId) }}</h5>
-          <div *ngIf="item.description"><h6 class="text-dark">{{ item.description }}</h6></div>
+          <div *ngIf="item.description"><h6 class="text-dark" style="font-weight: normal">{{ item.description }}</h6></div>
         </div>
       </div>
       <div class="modal fade in" tabindex="-1" role="dialog">
