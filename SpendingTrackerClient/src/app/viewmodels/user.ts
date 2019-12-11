@@ -1,3 +1,5 @@
+import {Currency} from './currency';
+
 export class User {
   public username: string;
   public name: string;

@@ -16,10 +16,13 @@
     <ul class="navbar-nav ml-auto">
       <ul class="nav navbar-nav">
         <li *ngIf="status" class="nav-item">
-          <a class="nav-link" (click)="logout()">Logoff</a>
+          <label class="navbar-text">Balance: {{ user.balance }} {{ currency[user.currency] }}</label>
+        </li>
+        <li *ngIf="status" class="nav-item" style="margin-left: 1vh">
+          <button type="button" class="btn btn-light" (click)="logout()">Logout</button>
         </li>
         <li *ngIf="!status" class="nav-item">
-          <a class="nav-link" routerLinkActive="false" routerLink="/register">Sign Up</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/register">Sign Up</a>
         </li>
         <li *ngIf="!status" class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>

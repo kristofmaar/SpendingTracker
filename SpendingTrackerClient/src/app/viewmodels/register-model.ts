@@ -1,3 +1,5 @@
+import {Currency} from './currency';
+
 export class RegisterModel {
   public email: string;
   public password: string;

@@ -1,6 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {UserService} from '../service/user.service';
 import {Subscription} from 'rxjs';
+import {User} from '../viewmodels/user';
+import {Currency} from '../viewmodels/currency';
 // import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -10,7 +12,10 @@ import {Subscription} from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private status = false;
-  private subscription: Subscription;
+  private user: User;
+  private statusSubscription: Subscription;
+  private balanceSubscription: Subscription;
+  private currency = Currency;
 
   constructor(private userService: UserService) { }
 
@@ -19,10 +24,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
+    this.statusSubscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
+    this.balanceSubscription = this.userService.user.subscribe(user => this.user = user);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.statusSubscription.unsubscribe();
+    this.balanceSubscription.unsubscribe();
   }
 }

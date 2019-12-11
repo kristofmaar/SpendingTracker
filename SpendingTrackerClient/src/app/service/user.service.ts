@@ -11,7 +11,9 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = 'https://localhost:5001/api/';
+  public user = new BehaviorSubject<User>(new User());
+
+  private baseUrl = 'https://localhost:5001/api/';
   // Observable navItem source
   // tslint:disable-next-line:variable-name
   private _authNavStatusSource = new BehaviorSubject<boolean>(false);
@@ -24,7 +26,8 @@ export class UserService {
   };
 
   constructor(private router: Router, private http: HttpClient) {
-    this.loggedIn = !!localStorage.getItem('auth_token');
+    this.user = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.loggedIn = !!this.user;
     this._authNavStatusSource.next(this.loggedIn);
   }
 
@@ -38,8 +41,9 @@ export class UserService {
       .post<User>(this.baseUrl + 'auth/login', JSON.stringify(loginModel), this.httpOptions)
       .pipe(
         tap(res => {
-          localStorage.setItem('auth_token', res.token);
+          localStorage.setItem('user', JSON.stringify(res));
           this.loggedIn = true;
+          this.user.next(res);
           this._authNavStatusSource.next(true);
           return true;
         })
@@ -47,7 +51,7 @@ export class UserService {
   }
 
   logout() {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
     this.router.navigate(['login']);
