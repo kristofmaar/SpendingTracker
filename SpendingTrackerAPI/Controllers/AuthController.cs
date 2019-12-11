@@ -78,8 +78,12 @@ namespace SpendingTrackerAPI.Controllers
                 return Ok(
                   new
                   {
-                      token = new JwtSecurityTokenHandler().WriteToken(token),
-                      expiration = token.ValidTo
+                      Name = user.Name,
+                      Username = user.UserName,
+                      Balance = user.Balance,
+                      Currency = user.Currency,
+                      Token = new JwtSecurityTokenHandler().WriteToken(token),
+                      Expiration = token.ValidTo
                   });
             }
             return Unauthorized();
